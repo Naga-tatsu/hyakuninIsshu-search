@@ -133,7 +133,12 @@ def search_poems(text, author, numbers, tags, use_kimariji,
     if text:
         keywords = split_keywords(text)
         for kw in keywords:
-            mask = result["上の句"].str.contains(kw, na=False) | result["下の句"].str.contains(kw, na=False)
+            mask = (
+                result["上の句"].str.contains(kw, na=False) |
+                result["下の句"].str.contains(kw, na=False) |
+                result["上の句（ひらがな）"].str.contains(kw, na=False) |
+                result["下の句（ひらがな）"].str.contains(kw, na=False)
+            )
             subset = result[mask]
             if not subset.empty:
                 outputs.append({
@@ -166,7 +171,10 @@ def search_poems(text, author, numbers, tags, use_kimariji,
                 else:
                     outputs.append(f"「{a}」に分類される歌は見つかりませんでした。")
             else:
-                subset = result[result["歌人"].str.contains(a, na=False)]
+                subset = result[
+                    result["歌人"].str.contains(a, na=False) |
+                    result["歌人（ひらがな）"].str.contains(a, na=False)
+                ]
                 if not subset.empty:
                     outputs.append({
                         "header": f"「{a}」が詠んだ歌：{len(subset)}首",
@@ -227,7 +235,7 @@ with gr.Blocks(css="""
         author_input = gr.Textbox(label="作者検索", placeholder="例：紫式部,清少納言")
         number_input = gr.Textbox(label="歌番号検索", placeholder="例：1-10,15,20")
 
-    tag_input = gr.CheckboxGroup(["春","夏","秋","冬","恋","旅","別れ"], label="ジャンルタグ", elem_classes="pink-checkbox")
+    tag_input = gr.CheckboxGroup(["男性","女性","春","夏","秋","冬","恋","旅","別れ"], label="ジャンルタグ", elem_classes="pink-checkbox")
 
     with gr.Row():
         show_upper_check = gr.Checkbox(label="上の句を表示", value=True, elem_classes="pink-checkbox")
