@@ -18,7 +18,9 @@ With this app, you can perform various searches on the Hyakunin Isshu (One Hundr
 It is useful for people involved with the Hyakunin Isshu, such as:
 
 ・Competitive karuta players
+
 ・Calligraphy artists planning works based on poems
+
 ・Teachers or lecturers using waka poetry in lessons
 
 For users who are somewhat familiar with the Hyakunin Isshu, the app provides simple and clear search results, making it helpful for organizing and exploring the poems.
