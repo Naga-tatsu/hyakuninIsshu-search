@@ -8,6 +8,7 @@
 ある程度、百人一首を知っている方が、検索するときにシンプルに情報が出るので、全体の情報整理などでご活用ください。
 
 --English--
+
 This repository contains the source code for an app published on Hugging Face Spaces.
 You can access the app via the link below:
 
