@@ -223,25 +223,35 @@ with gr.Blocks(css="""
         # 百人一首検索
         
         **■使い方**  
-        1. 歌番号検索は連番なら「1-10」のように、任意なら「3,5,7」のように入力してください。
-        2. 「恋」など、ジャンル検索もできます。
-        3. 上の句・下の句・ひらがな表示を変更できます。  
-        4. 競技かるた用検索もできます。決まり字の数ごとに表示します。  
+        1. 歌番号は連番なら「1-10」のように、連ならない複数は「3,5,7」のように検索してください。
+        2. 「女性」、「春」、「恋」など、ジャンル検索もできます。
+        3. リアルタイムで上の句・下の句・ひらがな表示を変更できます。  
+        4. 競技かるた用検索では、決まり字の数ごとに表示し、決まり字で区切りが入ります。
         """
     )
 
-    with gr.Row(elem_classes="input-row"):
-        text_input = gr.Textbox(label="本文検索", placeholder="例：春,秋")
-        author_input = gr.Textbox(label="作者検索", placeholder="例：紫式部,清少納言")
-        number_input = gr.Textbox(label="歌番号検索", placeholder="例：1-10,15,20")
+    with gr.Column():
+        gr.Markdown("**■ワード検索**")
+        with gr.Row(elem_classes="input-row"):
+            text_input = gr.Textbox(label="本文検索", placeholder="例：春,秋")
+            author_input = gr.Textbox(label="作者検索", placeholder="例：紫式部,清少納言")
+            number_input = gr.Textbox(label="歌番号検索", placeholder="例：1-10,15,20")
 
-    tag_input = gr.CheckboxGroup(["男性","女性","春","夏","秋","冬","恋","旅","別れ"], label="ジャンルタグ", elem_classes="pink-checkbox")
+    with gr.Column():
+        gr.Markdown("**■ジャンルタグ**")
+        tag_input = gr.CheckboxGroup(
+            ["男性","女性","春","夏","秋","冬","恋","旅","別れ"],
+            label="",
+            elem_classes="pink-checkbox"
+        )
 
-    with gr.Row():
-        show_upper_check = gr.Checkbox(label="上の句を表示", value=True, elem_classes="pink-checkbox")
-        show_lower_check = gr.Checkbox(label="下の句を表示", value=True, elem_classes="pink-checkbox")
-        show_upper_hira = gr.Checkbox(label="上の句をひらがな表示", value=False, elem_classes="pink-checkbox")
-        show_lower_hira = gr.Checkbox(label="下の句をひらがな表示", value=False, elem_classes="pink-checkbox")
+    with gr.Column():
+        gr.Markdown("**■リアルタイム表示切替**")
+        with gr.Row():
+            show_upper_check = gr.Checkbox(label="上の句を表示", value=True, elem_classes="pink-checkbox")
+            show_lower_check = gr.Checkbox(label="下の句を表示", value=True, elem_classes="pink-checkbox")
+            show_upper_hira = gr.Checkbox(label="上の句をひらがな表示", value=False, elem_classes="pink-checkbox")
+            show_lower_hira = gr.Checkbox(label="下の句をひらがな表示", value=False, elem_classes="pink-checkbox")
 
     # 常に表示されるチェックボックス
     use_kimariji = gr.Checkbox(label="競技かるた用検索を有効にする", value=False, elem_classes="pink-checkbox")
